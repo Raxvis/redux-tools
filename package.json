@@ -39,7 +39,7 @@
 	"license": "MIT",
 	"name": "redux-tools",
 	"scripts": {
-		"build": "gulp build",
+		"build": "NODE_ENV=production gulp build",
 		"clean": "yarn lint && yarn prettify",
 		"eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
 		"lint": "eslint src/** --fix",
