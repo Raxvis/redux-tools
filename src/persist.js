@@ -1,9 +1,7 @@
 /* global window */
 import { backupStorage, getPlatform, platforms } from './utils';
 
-let storage = getPlatform() === platforms.BROWSER && window.localStorage ? window.localStorage : backupStorage;
-
-storage = getPlatform() === platforms.REACT_NATIVE ? require('react-native').AsyncStorage : storage;
+const storage = getPlatform() === platforms.BROWSER && window.localStorage ? window.localStorage : backupStorage;
 
 export const clear = async () => {
 	await storage.clear();

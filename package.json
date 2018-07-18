@@ -4,20 +4,16 @@
 		"name": "Prefinem",
 		"url": "https://prefinem.com"
 	},
-	"description": "Redux Tools to make redux easy",
-	"files": ["dist"],
-	"homepage": "https://github.com/Prefinem/redux-tools",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Prefinem/redux-tools"
+	"dependencies": {
+		"isomorphic-fetch": "^2.2.1",
+		"redux": "^4.0.0",
+		"redux-saga": "^0.16.0"
 	},
-	"main": "./dist/index.js",
+	"description": "Redux Tools to make redux easy",
 	"devDependencies": {
 		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.6",
 		"babel-jest": "^23.4.0",
-		"babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-preset-react-app": "^3.1.2",
 		"babel-runtime": "^6.26.0",
 		"eslint": "^5.1.0",
@@ -36,23 +32,27 @@
 		"pretty-quick": "^1.6.0",
 		"through2": "^2.0.3"
 	},
+	"files": [
+		"dist"
+	],
+	"homepage": "https://github.com/Prefinem/redux-tools",
 	"license": "MIT",
+	"main": "./dist/index.js",
 	"name": "redux-tools",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Prefinem/redux-tools"
+	},
 	"scripts": {
 		"build": "NODE_ENV=production gulp build",
 		"clean": "yarn lint && yarn prettify",
 		"eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
 		"lint": "eslint src/** --fix",
-		"precommit": "yarn lint && pretty-quick --staged && yarn test",
-		"prepublishOnly": "yarn clean && yarn build && yarn test && pkg-ok",
+		"precommit": "yarn lint && pretty-quick --staged",
+		"prepublishOnly": "yarn clean && yarn build && pkg-ok",
 		"prettify": "prettier --config ./.prettierrc.json --write \"src/**\"",
-		"start": "gulp watch",
-		"test": "jest --coverage",
-		"watch": "learn run watch"
+		"start": "NODE_ENV=development gulp watch",
+		"test": "jest --coverage"
 	},
-	"dependencies": {
-		"isomorphic-fetch": "^2.2.1",
-		"redux": "^4.0.0",
-		"redux-saga": "^0.16.0"
-	}
+	"version": "2.0.0"
 }
