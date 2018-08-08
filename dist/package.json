@@ -1,0 +1,22 @@
+{
+	"author": {
+		"email": "prefinem@gmail.com",
+		"name": "Prefinem",
+		"url": "https://prefinem.com"
+	},
+	"dependencies": {
+		"isomorphic-fetch": "^2.2.1",
+		"redux": "^4.0.0",
+		"redux-saga": "^0.16.0"
+	},
+	"description": "Redux Tools to make redux easy",
+	"homepage": "https://github.com/Prefinem/redux-tools",
+	"license": "MIT",
+	"main": "./index.js",
+	"name": "redux-tools",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Prefinem/redux-tools"
+	},
+	"version": "2.0.0"
+}
