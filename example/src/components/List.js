@@ -69,19 +69,24 @@ class List extends React.Component {
 								<span className="small">
 									{' '}
 									-{' '}
-									<a href="#" onClick={() => this.handleHeaderClick()}>
+									<button className="btn btn-link" onClick={() => this.handleHeaderClick()}>
 										edit
-									</a>
+									</button>
 								</span>
 							</h5>
 						)}
 						<div className="form-group">
-							<input className="form-control" onKeyPress={(event) => this.handleInputKeyPress(event)} placeholder="New Todo" type="text" />
+							<input
+								className="form-control"
+								onKeyPress={(event) => this.handleInputKeyPress(event)}
+								placeholder="New Todo"
+								type="text"
+							/>
 						</div>
 						<ul className="list-group">{listTodos.map((todo) => <Todo key={todo.id} {...todo} />)}</ul>
-						<a className="card-link" href="#" onClick={this.handleDeleteClick.bind(this)}>
+						<button className="btn btn-link card-link" href="#" onClick={this.handleDeleteClick.bind(this)}>
 							Delete List
-						</a>
+						</button>
 					</div>
 				</div>
 			</div>

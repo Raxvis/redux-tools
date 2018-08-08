@@ -12,6 +12,11 @@ class Modal extends React.Component {
 		this.setState({ listName: event.target.value });
 	}
 
+	save(event) {
+		event.preventDefault();
+		this.props.save();
+	}
+
 	keyPress(event) {
 		if (event.key === 'Enter') {
 			event.preventDefault();
@@ -44,6 +49,11 @@ class Modal extends React.Component {
 								Home
 							</a>
 						</li>
+						<li className="nav-item">
+							<button className="btn btn-link nav-link" onClick={() => this.props.save()}>
+								{this.props.saving ? 'Saving...' : 'Save'}
+							</button>
+						</li>
 					</ul>
 					<form className="form-inline my-2 my-sm-0">
 						<input
@@ -61,9 +71,16 @@ class Modal extends React.Component {
 	}
 }
 
-const mapDispatchToProps = { addList: actions.lists.addList };
+const mapDispatchToProps = {
+	addList: actions.lists.addList,
+	save: actions.app.saveRequest,
+};
+
+const mapStateToProps = (state) => ({
+	saving: state.app.saving,
+});
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps,
 )(Modal);

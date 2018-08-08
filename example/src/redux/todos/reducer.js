@@ -2,8 +2,10 @@ import { types } from './actions';
 
 const defaultState = [];
 
-export default function results(state = defaultState, action) {
+const reducer = (state = defaultState, action) => {
 	switch (action.type) {
+		case types.SET:
+			return [...action.payload];
 		case types.ADD_TODO:
 			return [
 				...state,
@@ -26,4 +28,6 @@ export default function results(state = defaultState, action) {
 		default:
 			return state;
 	}
-}
+};
+
+export default reducer;
