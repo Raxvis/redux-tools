@@ -4,12 +4,7 @@
 		"name": "Prefinem",
 		"url": "https://prefinem.com"
 	},
-	"dependencies": {
-		"isomorphic-fetch": "^2.2.1",
-		"redux": "^4.0.0",
-		"redux-saga": "^0.16.0"
-	},
-	"description": "Redux Tools to make redux easy",
+	"description": "Redux Tools build system",
 	"devDependencies": {
 		"babel-core": "^6.26.3",
 		"babel-eslint": "^8.2.6",
@@ -23,22 +18,16 @@
 		"gulp-eslint": "^5.0.0",
 		"gulp-eslint-if-fixed": "^1.0.0",
 		"gulp-if": "^2.0.2",
-		"gulp-sourcemaps": "^2.6.4",
 		"husky": "^0.14.3",
 		"jest": "^23.4.1",
 		"jest-cli": "^23.4.1",
 		"pkg-ok": "^2.2.0",
 		"prettier": "^1.13.7",
-		"pretty-quick": "^1.6.0",
-		"through2": "^2.0.3"
+		"pretty-quick": "^1.6.0"
 	},
-	"files": [
-		"dist"
-	],
 	"homepage": "https://github.com/Prefinem/redux-tools",
 	"license": "MIT",
-	"main": "./dist/index.js",
-	"name": "redux-tools",
+	"name": "redux-tools-build-system",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Prefinem/redux-tools"
@@ -51,6 +40,7 @@
 		"precommit": "yarn lint && pretty-quick --staged",
 		"prepublishOnly": "yarn clean && yarn build && pkg-ok",
 		"prettify": "prettier --config ./.prettierrc.json --write \"src/**\"",
+		"pub": "yarn publish dist/",
 		"start": "NODE_ENV=development gulp watch",
 		"test": "jest --coverage"
 	},
