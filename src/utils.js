@@ -33,8 +33,11 @@ export const getPlatform = () => {
 	return platforms.NODE;
 };
 
+export const snakeToCamelCase = (str) => str.toLowerCase().replace(/_\w/g, (match) => match[1].toUpperCase());
+
 export default {
 	backupStorage,
 	getPlatform,
 	platforms,
+	snakeToCamelCase,
 };

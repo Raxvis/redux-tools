@@ -1,4 +1,5 @@
-export const actionCreatorCreator = (type) => (payload) => ({
+const actionCreatorCreator = (type, meta) => (payload) => ({
+	...meta,
 	payload,
 	type,
 });

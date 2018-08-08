@@ -1,9 +1,6 @@
-/* global fetch, window */
+/* global fetch */
 /* eslint max-params:off */
 import { getPlatform, platforms } from './utils';
-import { call } from 'redux-saga/effects';
-
-const getURL = (url) => (window && window.url && url.indexOf('http') > -1 ? `${window.url}${url}` : url);
 
 const getRequest = (method, payload, options = {}) => {
 	if (options.token) {
@@ -32,17 +29,22 @@ const api = async (method, url, payload, options) => {
 		require('isomorphic-fetch');
 	}
 
-	const response = await fetch(getURL(url), getRequest(method, payload, options));
+	const response = await fetch(url, getRequest(method, payload, options));
 	const jsonResponse = await response.json();
 
 	return jsonResponse;
 };
 
-export const del = (url, payload, options) => call(api, 'DELETE', url, payload, options);
-export const get = (url, options) => call(api, 'GET', url, null, options);
-export const post = (url, payload, options) => call(api, 'POST', url, payload, options);
-export const put = (url, payload, options) => call(api, 'PUT', url, payload, options);
-export const remove = (url, payload, options) => call(api, 'DELETE', url, payload, options);
+export const del = (url, payload, options) => api('DELETE', url, payload, options);
+export const get = (url, options) => api('GET', url, null, options);
+export const post = (url, payload, options) => api('POST', url, payload, options);
+export const put = (url, payload, options) => api('PUT', url, payload, options);
+export const remove = (url, payload, options) => api('DELETE', url, payload, options);
+
+export const urlEncodeParams = (params) =>
+	Object.keys(params)
+		.map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+		.join('&');
 
 export default {
 	del,
@@ -50,4 +52,5 @@ export default {
 	post,
 	put,
 	remove,
+	urlEncodeParams,
 };
