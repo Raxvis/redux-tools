@@ -1,3 +1,8 @@
+/*
+ * This is an example usage of the low-level actionCreatorCreator that's used internally
+ * by generateActionsAndTypes. It takes a type string and turns it into an action creator
+ * which can take a single payload argument.
+ */
 import { actionCreatorCreator } from 'redux-tools';
 
 export const types = {
