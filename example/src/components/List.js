@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from './Todo';
-import { actions } from './../redux';
+import { actions } from './../models';
 import { connect } from 'react-redux';
 
 class List extends React.Component {

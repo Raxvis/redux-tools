@@ -1,5 +1,5 @@
 import React from 'react';
-import { actions } from './../redux';
+import { actions } from './../models';
 import { connect } from 'react-redux';
 
 class Modal extends React.Component {
