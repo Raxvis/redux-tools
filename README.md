@@ -1,10 +1,24 @@
 # Redux Tools
 
-Redux Tools: to make redux easy and reduce boilerplate with useful tools and conventions.
+Redux Tools to make redux easy and reduce boilerplate with useful tools and conventions.
+
+## Contents
+
+-   [Getting Started](#getting-started)
+-   [Models](#models)
+    -   [The Problem](#the-problem)
+    -   [The Solution](#the-solution)
+    -   [Model Conventions](#model-conventions)
+-   [API Reference](#api-reference)
+    -   [Types](#types)
+        -   [Basic](#basic)
+        -   [Async](#async)
+    -   [generateActionsAndTypes](#generateactionsandtypes)
+    -   [models.create](#modelscreate)
 
 ## Getting Started
 
-Please view the example folder or continue to get a quick introduction or continue reading.
+Please view the example folder to get a quick introduction or continue reading.
 
 ## Models
 
@@ -85,7 +99,7 @@ A model can be a folder with separate files for actions, reducer, selectors, etc
 
 Next let's look at each piece in a little more detail.
 
-## Actions and Types
+#### Actions and Types
 
 This is what a typical definition for a type and action looks like:
 
@@ -121,7 +135,7 @@ That repetition was a source of great angst for us so we thought there's a great
 
 The first step was to decide that since actions and types are so closely related anyway, why don't we explicitly couple them together?
 
-### Action and Type Conventions
+##### Conventions for Actions and Types
 
 -   **actions have a `type` and a `payload`**. Action creators will always accept a single parameter that will be placed onto the `payload` key of the action object.
 -   **types will be `SNAKE_CASE` with a `namespace` of any case**
@@ -135,9 +149,189 @@ import { Async, Basic } from 'redux-tools/types';
 import { generateActionsAndTypes } from 'redux-tools';
 
 const { actions, types } = generateActionsAndTypes('user', [
-	new Async('SAVE')
+	new Async('SAVE'),
 	new Basic('SET_FIRST_NAME'),
+	new Basic('SET_LAST_NAME'),
 ]);
+```
+
+#### Reducers
+
+Model reducers are combined into the root reducer using Redux's `combineReducers` function.
+
+#### Sagas
+
+Model sagas are combined by `fork`ing each saga inside the root saga.
+
+## API Reference
+
+### Types
+
+Use an implementation of the `Type` class when defining your types. Redux Tools comes with two types defined out of the box: `Async` and `Basic`.
+
+#### Basic
+
+When used with `generateActionsAndTypes`, this will result in a namespaced type and action creator.
+
+```javascript
+import { Basic } from 'redux-tools/types';
+import { generateActionsAndTypes } from 'redux-tools';
+
+const { actions, types } = generateActionsAndTypes('user', [new Basic('SET_FIRST_NAME')]);
+
+console.log(actions);
+// { setFirstName: (payload) => ({ payload, type: 'user/SET_FIRST_NAME' }) }
+
+console.log(types);
+// { SET_FIRST_NAME: 'user/SET_FIRST_NAME' }
+```
+
+#### Async
+
+When used with `generateActionsAndTypes`, this will result in request, success, and failure action creators and types.
+
+```javascript
+import { Async } from 'redux-tools/types';
+import { generateActionsAndTypes } from 'redux-tools';
+
+const { actions, types } = generateActionsAndTypes('user', [new Async('SAVE')]);
+
+console.log(actions);
+/*
+{
+	saveRequest: (payload) => ({ payload, type: 'user/SAVE_REQUEST' }),
+	saveSuccess: (payload) => ({ payload, type: 'user/SAVE_SUCCESS' }),
+	saveFailure: (payload) => ({ payload, type: 'user/SAVE_FAILURE' }),
+}
+*/
+
+console.log(types);
+/*
+types: {
+	SAVE_REQUEST: 'user/SAVE_REQUEST',
+	SAVE_SUCCESS: 'user/SAVE_SUCCESS',
+	SAVE_FAILURE: 'user/SAVE_FAILURE',
+}
+*/
+```
+
+### generateActionsAndTypes
+
+#### Arguments
+
+1.  `namespace` (_string_)
+2.  `types` (_array_)
+
+#### Returns
+
+```javascript
+{
+	actions: {},
+	types: {},
+}
+```
+
+#### Example
+
+```javascript
+import { Async, Basic } from 'redux-tools/types';
+import { generateActionsAndTypes } from 'redux-tools';
+
+const { actions, types } = generateActionsAndTypes('user', [
+	new Async('SAVE'),
+	new Basic('SET_FIRST_NAME'),
+	new Basic('SET_LAST_NAME'),
+]);
+
+console.log(actions);
+/*
+{
+	saveRequest: (payload) => ({ payload, type: 'user/SAVE_REQUEST' }),
+	saveSuccess: (payload) => ({ payload, type: 'user/SAVE_SUCCESS' }),
+	saveFailure: (payload) => ({ payload, type: 'user/SAVE_FAILURE' }),
+	setFirstName: (payload) => ({ payload, type: 'user/SET_FIRST_NAME' }),
+	setLastName: (payload) => ({ payload, type: 'user/SET_LAST_NAME' }),
+}
+*/
+
+console.log(types);
+/*
+types: {
+	SAVE_REQUEST: 'user/SAVE_REQUEST',
+	SAVE_SUCCESS: 'user/SAVE_SUCCESS',
+	SAVE_FAILURE: 'user/SAVE_FAILURE',
+	SET_FIRST_NAME: 'user/SET_FIRST_NAME',
+	SET_LAST_NAME: 'user/SET_LAST_NAME',
+}
+*/
+```
+
+### models.create
+
+Function to combine your different models for use in your app. Typically used in the `index.js` file in your models directory.
+
+#### Arguments
+
+1.  `models` (_object_)
+
+#### Returns
+
+```javascript
+{
+	actions,
+	reducer,
+	sagas,
+	selectors,
+	types,
+}
+```
+
+#### Example
+
+```javascript
+import app from './app';
+import lists from './lists';
+import { models } from 'redux-tools';
+import todos from './todos';
+
+export const { actions, reducer, sagas, selectors, types } = models.create({
+	app,
+	lists,
+	todos,
+});
+
+console.log(actions);
+/*
+{
+	app: { ... },
+	lists: { ... },
+	todos: { ... },
+}
+*/
+
+// Root reducer function to use in your redux store
+console.log(reducer);
+
+// Root saga generator function to pass to the saga middleware
+console.log(sagas);
+
+console.log(selectors);
+/*
+{
+	app: { ... },
+	lists: { ... },
+	todos: { ... },
+}
+*/
+
+console.log(types);
+/*
+{
+	app: { ... },
+	lists: { ... },
+	todos: { ... },
+}
+*/
 ```
 
 ## TODO
