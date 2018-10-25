@@ -25,6 +25,9 @@
 		"prettier": "^1.13.7",
 		"pretty-quick": "^1.6.0"
 	},
+	"peerDependencies": {
+		"redux-saga": ">=0.16"
+	},
 	"homepage": "https://github.com/Prefinem/redux-tools",
 	"license": "MIT",
 	"name": "redux-tools-build-system",
