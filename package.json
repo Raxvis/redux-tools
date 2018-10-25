@@ -4,48 +4,56 @@
 		"name": "Prefinem",
 		"url": "https://prefinem.com"
 	},
-	"description": "Redux Tools build system",
+	"description": "Redux Tools to make redux easy",
 	"devDependencies": {
-		"babel-core": "^6.26.3",
-		"babel-eslint": "^8.2.6",
-		"babel-jest": "^23.4.0",
-		"babel-preset-react-app": "^3.1.2",
-		"babel-runtime": "^6.26.0",
-		"eslint": "^5.1.0",
-		"eslint-config-prettier": "^2.9.0",
-		"gulp": "^3.9.1",
-		"gulp-babel": "^7.0.1",
-		"gulp-eslint": "^5.0.0",
-		"gulp-eslint-if-fixed": "^1.0.0",
-		"gulp-if": "^2.0.2",
-		"husky": "^0.14.3",
-		"jest": "^23.4.1",
-		"jest-cli": "^23.4.1",
-		"pkg-ok": "^2.2.0",
-		"prettier": "^1.13.7",
-		"pretty-quick": "^1.6.0"
-	},
-	"peerDependencies": {
-		"redux-saga": ">=0.16"
+		"@babel/cli": "^7.1.0",
+		"@babel/core": "^7.1.0",
+		"babel-eslint": "^10.0.1",
+		"babel-preset-react-app": "^5.0.4",
+		"eslint": "^5.7.0",
+		"eslint-config-prettier": "^3.1.0",
+		"eslint-plugin-babel": "^5.2.1",
+		"eslint-plugin-jest": "^21.26.0",
+		"eslint-plugin-react": "^7.11.1",
+		"husky": "^1.0.0",
+		"jest": "^23.6.0",
+		"lint-staged": "^7.3.0",
+		"prettier": "^1.14.3"
 	},
 	"homepage": "https://github.com/Prefinem/redux-tools",
+	"husky": {
+		"hooks": {
+			"pre-commit": "yarn staged"
+		}
+	},
 	"license": "MIT",
-	"name": "redux-tools-build-system",
+	"lint-staged": {
+		"*.js": [
+			"eslint --fix",
+			"prettier --config ./.prettierrc.json --write",
+			"jest --bail --findRelatedTests",
+			"git add"
+		]
+	},
+	"main": "./index.js",
+	"name": "redux-tools",
+	"peerDependencies": {
+		"isomorphic-fetch": ">=2",
+		"redux": ">=4",
+		"redux-saga": ">=0.16"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Prefinem/redux-tools"
 	},
 	"scripts": {
-		"build": "NODE_ENV=production gulp build",
+		"build": "NODE_ENV=production ./node_modules/.bin/babel src/ --out-dir dist",
 		"clean": "yarn lint && yarn prettify",
 		"eslint-check": "eslint --print-config .eslintrc.json | eslint-config-prettier-check",
 		"lint": "eslint src/** --fix",
-		"precommit": "yarn lint && pretty-quick --staged",
-		"prepublishOnly": "yarn clean && yarn build && pkg-ok",
 		"prettify": "prettier --config ./.prettierrc.json --write \"src/**\"",
-		"pub": "yarn clean && yarn build && yarn publish dist/",
-		"start": "NODE_ENV=development gulp watch",
+		"staged": "lint-staged",
 		"test": "jest --coverage"
 	},
-	"version": "0.0.1"
+	"version": "3.0.0"
 }

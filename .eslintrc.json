@@ -1,34 +1,36 @@
 {
 	"env": {
+		"browser": true,
 		"es6": true,
 		"node": true
 	},
-	"extends": ["eslint:all", "prettier", "prettier/react"],
+	"extends": ["eslint:all", "plugin:react/all", "prettier", "prettier/react", "plugin:jest/recommended"],
 	"parser": "babel-eslint",
 	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 6,
 		"sourceType": "module"
 	},
+	"plugins": ["babel", "react", "jest"],
 	"rules": {
-		"array-bracket-newline": "off",
 		"array-element-newline": "off",
-		"brace-style": "off",
 		"capitalized-comments": "off",
 		"class-methods-use-this": "off",
 		"eol-last": "off",
+		"func-style": "off",
 		"global-require": "off",
 		"id-length": "off",
 		"init-declarations": "off",
-		"max-statements-per-line": [
-			"error",
-			{
-				"max": 2
-			}
-		],
+		"lines-between-class-members": "off",
+		"multiline-comment-style": "off",
 		"multiline-ternary": "off",
 		"no-console": "off",
 		"no-extra-parens": "off",
+		"no-invalid-this": "off",
 		"no-magic-numbers": "off",
-		"no-process-env": "off",
+		"no-shadow": "off",
 		"no-sync": "off",
 		"no-tabs": "off",
 		"no-ternary": "off",
@@ -51,11 +53,33 @@
 		"quote-props": "off",
 		"quotes": "off",
 		"radix": "off",
-		"valid-jsdoc": [
+		"react/destructuring-assignment": "off",
+		"react/forbid-component-props": "off",
+		"react/forbid-prop-types": "off",
+		"react/jsx-boolean-value": "off",
+		"react/jsx-child-element-spacing": "off",
+		"react/jsx-filename-extension": "off",
+		"react/jsx-max-depth": [
 			"error",
 			{
-				"requireReturn": false
+				"max": 4
 			}
-		]
+		],
+		"react/jsx-no-bind": "off",
+		"react/jsx-no-literals": "off",
+		"react/jsx-one-expression-per-line": "off",
+		"react/jsx-uses-react": "error",
+		"react/no-array-index-key": "off",
+		"react/no-set-state": "off",
+		"react/no-string-refs": "off",
+		"react/prefer-stateless-function": "off",
+		"react/prop-types": "off",
+		"react/require-optimization": "off",
+		"require-jsdoc": "off"
+	},
+	"settings": {
+		"react": {
+			"version": "16.3"
+		}
 	}
 }
