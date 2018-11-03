@@ -2,6 +2,7 @@ module.exports = (api) => {
 	api.cache(false);
 
 	return {
-		presets: ['react-app'],
+		plugins: ['@babel/plugin-proposal-object-rest-spread'],
+		presets: ['@babel/preset-react'],
 	};
 };
