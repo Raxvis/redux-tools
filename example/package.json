@@ -28,6 +28,11 @@
 		"type": "git",
 		"url": "git+https://github.com/Prefinem/redux-tools.git"
 	},
+	"resolutions": {
+		"js-yaml": "3.13.1",
+		"mem": "4.0.0",
+		"webpack-dev-server": "3.1.11"
+	},
 	"scripts": {
 		"build": "react-scripts build",
 		"deploy": "gh-pages -d build",
