@@ -50,7 +50,7 @@
 	"resolutions": {
 		"js-yaml": "3.13.1",
 		"mem": "6.1.0",
-		"webpack-dev-server": "3.10.3"
+		"webpack-dev-server": "3.11.0"
 	},
 	"scripts": {
 		"build": "rm -rf dist/ && NODE_ENV=production ./node_modules/.bin/babel src/ --out-dir dist",
