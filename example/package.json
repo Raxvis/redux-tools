@@ -17,7 +17,7 @@
 		"babel-eslint": "10.1.0",
 		"eslint": "6.8.0",
 		"eslint-plugin-babel": "5.3.0",
-		"eslint-plugin-react": "7.19.0",
+		"eslint-plugin-react": "7.20.0",
 		"gh-pages": "2.2.0"
 	},
 	"homepage": ".",
